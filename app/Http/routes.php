@@ -12,7 +12,7 @@
 */
 
 Route::get('/','HomeController@index');
-Route::get('/addNewGroup','HomeController@addNewGroup');
+//Route::get('/addNewGroup','HomeController@getaddNewGroup');
 Route::get('/loginAccount','HomeController@login');
 Route::get('/logout','HomeController@logoutAccount');
 Route::get('/sharingin','HomeController@shareWithYou');
@@ -25,9 +25,9 @@ Route::get('/downloadfilecloud', 'HomeController@downloadFileRead');
 Route::get('/shareother','HomeController@shareWithOther');
 
 
-Route::get('/singin', function () {
-    return view('login');
-});
+//Route::get('/singin', function () {
+//    return view('login');
+//});
 
 
 
