@@ -23,6 +23,7 @@ Route::get('/setpassAccount','HomeController@setPassword');
 Route::get('/openfilecloud', 'HomeController@openFileRead');
 Route::get('/downloadfilecloud', 'HomeController@downloadFileRead');
 Route::get('/shareother','HomeController@shareWithOther');
+Route::get('/testShow','HomeController@getTestShow');
 
 
 //Route::get('/singin', function () {

@@ -193,6 +193,9 @@ class HomeController extends Controller
 
 
     }
+    function getTestShow(Request $request){
+        echo 'test ok';
+    }
 
 
 
