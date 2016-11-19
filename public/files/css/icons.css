@@ -1,0 +1,260 @@
+[class^="icon-"], [class*=" icon-"] {
+	background-repeat: no-repeat;
+	background-position: center;
+	min-width: 16px;
+	min-height: 16px;
+}
+
+
+
+
+/* general assets */
+
+.icon-breadcrumb {
+	background-image: url('../img/breadcrumb.svg');
+}
+
+.icon-loading {
+	background-image: url('../img/loading.gif');
+}
+.icon-loading-dark {
+	background-image: url('../img/loading-dark.gif');
+}
+.icon-loading-small {
+	background-image: url('../img/loading-small.gif');
+}
+
+
+
+
+/* action icons */
+
+.icon-add {
+	background-image: url('../img/add.svg');
+}
+
+.icon-caret {
+	background-image: url('../img/caret.svg');
+}
+.icon-caret-dark {
+	background-image: url('../img/caret-dark.svg');
+}
+
+.icon-checkmark {
+	background-image: url('../img/checkmark.svg');
+}
+
+.icon-checkmark-white {
+	background-image: url('../img/checkmark-white.svg');
+}
+
+.icon-close {
+	background-image: url('../img/close.svg');
+}
+
+.icon-confirm {
+	background-image: url('../img/confirm.svg');
+}
+
+.icon-delete,
+.icon-delete.no-permission:hover,
+.icon-delete.no-permission:focus {
+	background-image: url('../img/delete.svg');
+}
+.icon-delete:hover,
+.icon-delete:focus {
+	background-image: url('../img/delete-hover.svg');
+}
+
+.icon-download {
+	background-image: url('../img/download.svg');
+}
+
+.icon-external {
+	background-image: url('../img/external.svg');
+}
+
+.icon-history {
+	background-image: url('../img/history.svg');
+}
+
+.icon-info {
+	background-image: url('../img/info.svg');
+}
+.icon-info-white {
+	background-image: url('../img/info-white.svg');
+}
+
+.icon-logout {
+	background-image: url('../img/logout.svg');
+}
+
+.icon-mail {
+	background-image: url('../img/mail.svg');
+}
+
+.icon-menu {
+	background-image: url('../img/menu.svg');
+}
+
+.icon-more {
+	background-image: url('../img/more.svg');
+}
+
+.icon-password {
+	background-image: url('../img/password.svg');
+}
+
+.icon-pause {
+	background-image: url('../img/pause.svg');
+}
+.icon-pause-big {
+	background-image: url('../img/pause-big.svg');
+}
+
+.icon-play {
+	background-image: url('../img/play.svg');
+}
+.icon-play-add {
+	background-image: url('../img/play-add.svg');
+}
+.icon-play-big {
+	background-image: url('../img/play-big.svg');
+}
+.icon-play-next {
+	background-image: url('../img/play-next.svg');
+}
+.icon-play-previous {
+	background-image: url('../img/play-previous.svg');
+}
+
+.icon-public {
+	background-image: url('../img/public.svg');
+}
+
+.icon-rename {
+	background-image: url('../img/rename.svg');
+}
+
+.icon-search {
+	background-image: url('../img/search.svg');
+}
+.icon-search-white {
+	background-image: url('../img/search-white.svg');
+}
+
+.icon-settings {
+	background-image: url('../img/settings.svg');
+}
+
+.icon-share {
+	background-image: url('../img/share.svg');
+}
+.icon-shared {
+	background-image: url('../img/shared.svg');
+}
+
+.icon-sound {
+	background-image: url('../img/sound.svg');
+}
+.icon-sound-off {
+	background-image: url('../img/sound-off.svg');
+}
+
+.icon-star,
+.icon-starred:hover,
+.icon-starred:focus {
+	background-image: url('../img/star.svg');
+}
+
+.icon-starred,
+.icon-star:hover,
+.icon-star:focus {
+	background-image: url('../img/starred.svg');
+}
+
+.icon-toggle {
+	background-image: url('../img/toggle.svg');
+}
+
+.icon-triangle-e {
+	background-image: url('../img/triangle-e.svg');
+}
+.icon-triangle-n {
+	background-image: url('../img/triangle-n.svg');
+}
+.icon-triangle-s {
+	background-image: url('../img/triangle-s.svg');
+}
+
+.icon-upload {
+	background-image: url('../img/upload.svg');
+}
+.icon-upload-white {
+	background-image: url('../img/upload-white.svg');
+}
+
+.icon-user {
+	background-image: url('../img/user.svg');
+}
+
+.icon-view-close {
+	background-image: url('../img/view-close.svg');
+}
+.icon-view-next {
+	background-image: url('../img/view-next.svg');
+}
+.icon-view-pause {
+	background-image: url('../img/view-pause.svg');
+}
+.icon-view-play {
+	background-image: url('../img/view-play.svg');
+}
+.icon-view-previous {
+	background-image: url('../img/view-previous.svg');
+}
+
+
+
+
+/* places icons */
+
+.icon-calendar-dark {
+	background-image: url('../img/places/calendar-dark.svg');
+}
+
+.icon-contacts-dark {
+	background-image: url('../img/contacts-dark.svg');
+}
+
+.icon-file {
+	background-image: url('../img/file.svg');
+}
+.icon-files {
+	background-image: url('../img/places/files.svg');
+}
+.icon-folder {
+	background-image: url('../img/folder.svg');
+}
+.icon-filetype-text {
+	background-image: url('../img/text.svg');
+}
+.icon-filetype-folder {
+	background-image: url('../img/folder.svg');
+}
+
+.icon-home {
+	background-image: url('../img/home.svg');
+}
+
+.icon-link {
+	background-image: url('../img/link.svg');
+}
+
+.icon-music {
+	background-image: url('../img/music.svg');
+}
+
+.icon-picture {
+	background-image: url('../img/picture.svg');
+}
