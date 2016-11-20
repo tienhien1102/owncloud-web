@@ -336,9 +336,8 @@
                                 </a>
                                 <input id="select-files-3" type="checkbox" class="selectCheckBox">
                                 <label for="select-files-3">
-                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;">
-                                    <div class="thumbnail" style="background-size: 32px;">
-                                    </div>
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;"></div>
+                                    <div class="thumbnail" style="background-size: 32px;"></div>
                                     <span class="hidden-visually">Select</span>
                                 </label>
                                 <a class="name" href="">
