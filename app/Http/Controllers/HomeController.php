@@ -40,8 +40,48 @@ class HomeController extends Controller
         } else {
             $usersharedatacode = json_decode($usersharedata)->message;
         }
+
+        //test start
+        $authen = session('current_user') . ':' . session('current_password');
+        $ch = curl_init('');
+        curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_USERPWD, $authen);
+        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+
+        $response = curl_exec($ch);
+//      dd($userdatadecode);
+        $DOM = new \DOMDocument();
+        $DOM->loadHTML($response);
+        //get all H1
+        $items = $DOM->getElementsByTagName('a');
+        $listfilename = array();
+        for ($i = 0; $i < $items->length; $i++) {
+            if (!(strpos($items->item($i)->nodeValue, 'http') !== false)) {
+                array_push($listfilename, $items->item($i)->nodeValue);
+            }
+
+        }
+
+        $userdatadecode_temp = array();
+        for ($i = 0; $i < count($userdatadecode); $i++){
+            for ($j=0;$j< count($listfilename);$j++){
+
+                if ($userdatadecode[$i]->nameFile == $listfilename[$j])
+                    array_push($userdatadecode_temp,$userdatadecode[$i]);
+            }
+        }
+        $userdatadecode = $userdatadecode_temp;
+//        dd($userdatadecode);
+
+
+//        if(!$response) {
+//            return response()->json($response);
+//        }
+       //test end
+//
         $response = array("userdata" => $userdatadecode, "usersharedata" => $usersharedatacode);
-//        dd($response);
         return view('files')->with('datas', $response);
     }
 
@@ -204,6 +244,8 @@ class HomeController extends Controller
         curl_exec($ch);
         curl_close($ch);
         fclose($fp);
+        echo 'done';
+
 
 
     }
@@ -227,9 +269,9 @@ class HomeController extends Controller
         curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
 
         $response = curl_exec($ch);
-        return response()->json($filenameshort);
+//        return response()->json($filenameshort);
         if(!$response) {
-            return $list_split;
+            return response()->json($response);
         }
 
 

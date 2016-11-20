@@ -263,7 +263,7 @@
                                 case "pdf":
                                     return "application-pdf.svg";
                                 case "mp3":
-                                    return "application-office.svg";
+                                    return "application-mp3.png";
                                 case "doc":
                                     return "application-office.svg";
                                 case "docx":
