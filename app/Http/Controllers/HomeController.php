@@ -28,6 +28,7 @@ class HomeController extends Controller
         if (session('current_user') == null) {
             return view('login');
         }
+
         $userdata = CallAPI('GET', 'http://45.76.151.128:12351/usergetdata?username=' . session('current_user'));
         $usersharedata = CallAPI('GET', 'http://45.76.151.128:12351/usergetsharedata?username=' . session('current_user'));
         if (json_decode($userdata)->code != "200") {
@@ -227,13 +228,20 @@ class HomeController extends Controller
     {
         $data = $request->input();
         $filepath = 'http://45.76.151.128/owncloud/data/' . session('current_user') . '/' . $data['filepath'];
+        $user_agent     =   $_SERVER['HTTP_USER_AGENT'];
+
 
         $list_split = explode("/", $filepath);
         $name_file = $list_split[count($list_split) - 1];
-        $local_file = "/tmp/" . $name_file;//This is the file where we save the information
+        if (strpos($user_agent, 'Linux') !== false) {
+            $local_file = "/tmp/" . $name_file;//This is the file where we save the information
+        }else{
+            $local_file = "C:\\" . $name_file;//This is the file where we save the information
+        }
+
         $remote_file = $filepath; //Here is the file we are downloading
 
-        echo 'dowloading...';
+        echo 'dowloading...</br>';
         $ch = curl_init();
         $fp = fopen($local_file, 'w+');
         $ch = curl_init($remote_file);
@@ -244,7 +252,13 @@ class HomeController extends Controller
         curl_exec($ch);
         curl_close($ch);
         fclose($fp);
-        echo 'done';
+        echo 'done </br>';
+        if (strpos($user_agent, 'Linux') !== false) {
+            echo 'save in: /tmp/'.$name_file;
+        }else{
+            echo 'save in: C:\\'.$name_file;
+        }
+
 
 
 
@@ -261,7 +275,7 @@ class HomeController extends Controller
 
         $authen = session('current_user').':'.session('current_password');
         $ch = curl_init('');
-        curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/Documents/'.$filenameshort);
+        curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/'.$filenameshort);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_USERPWD,$authen );
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);

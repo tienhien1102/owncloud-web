@@ -451,12 +451,12 @@
                                 dataType: 'json',
                                 success: function (data) {
                                     console.log(data);
-                                    location.reload();
+//                                    location.reload();
                                 },
                                 error: function (data) {
                                     console.log('error');
                                     console.log('Error:', data);
-                                    location.reload();
+//                                    location.reload();
                                 }
                             });
                         });
