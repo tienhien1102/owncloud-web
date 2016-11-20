@@ -156,29 +156,6 @@
                         </div>
                     </div>
                     <div class="actions creatable">
-                        <div id="new" class="button">
-                            <a>New</a>
-                            <ul style="display: none;">
-                                <li class="icon-filetype-text svg" data-type="file" data-newname="New text file.txt">
-                                    <p>Text file</p>
-                                </li>
-                                <li class="icon-filetype-folder svg" data-type="folder" data-newname="New folder">
-                                    <p>Folder</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div id="upload" class="button" original-title="Upload (max. 513 MB)">
-                            <input type="hidden" id="max_upload" name="MAX_FILE_SIZE" value="537919488"
-                                   original-title="">
-                            <input type="hidden" id="upload_limit" value="537919488" original-title="">
-                            <input type="hidden" id="free_space" value="178767515648" original-title="">
-                            <input type="hidden" class="max_human_file_size" value="(max )" original-title="">
-                            <input type="file" id="file_upload_start" name="files[]" data-url="" original-title=""
-                                   multiple="multiple" >
-                            <label for="file_upload_start" class="svg icon-upload">
-                                <span class="hidden-visually">Upload</span>
-                            </label>
-                        </div>
                         <div id="uploadprogresswrapper">
                             <div id="uploadprogressbar"></div>
                             <button class="stop icon-close" style="display:none">

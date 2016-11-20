@@ -1,5 +1,5 @@
 <div id="header">
-    <a href="http://localhost/index.php" id="owncloud" tabindex="1">
+    <a href="/" id="owncloud" tabindex="1">
         <div class="logo-icon svg" style="background-image: url({{ URL::asset('login/image/logo-icon.svg') }})">
             <h1 class="hidden-visually">ownCloud </h1>
         </div>
@@ -25,12 +25,12 @@
                         Personal
                     </a>
                 </li>
-                <li>
-                    <a href="#" title="">
-                        <img class="svg" alt="" src="{{ URL::asset('files/image/help.svg')}}">
-                        Help
-                    </a>
-                </li>
+                {{--<li>--}}
+                    {{--<a href="#" title="">--}}
+                        {{--<img class="svg" alt="" src="{{ URL::asset('files/image/help.svg')}}">--}}
+                        {{--Help--}}
+                    {{--</a>--}}
+                {{--</li>--}}
                 <li>
                     <a id="logout" href="/logout">
                         <img class="svg" alt="" src="{{ URL::asset('login/image/logout.svg')}}">

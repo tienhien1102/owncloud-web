@@ -24,6 +24,8 @@ Route::get('/openfilecloud', 'HomeController@openFileRead');
 Route::get('/downloadfilecloud', 'HomeController@downloadFileRead');
 Route::get('/shareother','HomeController@shareWithOther');
 Route::get('/testShow','HomeController@getTestShow');
+Route::get('/uploadfile','HomeController@getUploadfile');
+
 
 
 //Route::get('/singin', function () {

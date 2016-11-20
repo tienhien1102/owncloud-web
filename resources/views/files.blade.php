@@ -39,66 +39,7 @@
     <link rel="stylesheet" href="{{ URL::asset('files/css/trash.css')}}" media="screen">
     {{--<script src="{{ URL::asset('files/js/oc.js') }}"></script>--}}
     <script src="{{ URL::asset('files/js/jquery.min.js') }}"></script>
-    {{--<script src="{{ URL::asset('files/js/jquery-migrate.min.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery-ui.custom.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/underscore.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/moment-with-locales.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/handlebars.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/md5.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/placeholders.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery-tipsy.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/compatibility.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery.ocdialog.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/oc-dialogs.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/js.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/l10n.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/octemplate.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/eventsource.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/config.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/search.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/oc-requesttoken.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/apps.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/snap.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/placeholder.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery.avatar.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/avatar.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/backgroundjobs.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/previewplugin.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/share.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/share(1).js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/external.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/editor.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/ace.js') }}"></script>--}}
 
-    {{--<script src="{{ URL::asset('files/js/versions.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/viewer.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery.colorbox.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/firstrunwizard.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/activate.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery.mousewheel-3.1.1.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/slideshow.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/public.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/app.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/file-upload.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery.iframe-transport.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery.fileupload.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/jquery-visibility.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/filesummary.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/breadcrumb.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/filelist.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/search(1).js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/favoritesfilelist.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/tagsplugin.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/favoritesplugin.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/handlebars.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/app(1).js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/sharedfilelist.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/app(2).js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/filelist(1).js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/fileactions.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/files.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/navigation.js') }}"></script>--}}
-    {{--<script src="{{ URL::asset('files/js/keyboardshortcuts.js') }}"></script>--}}
 </head>
 <body id="body-user">
 <header role="banner">
@@ -365,77 +306,77 @@
                                         <img class="svg" alt="" src="{{ URL::asset('files/image/download.svg')}}">
                                         <span> Download</span>
                                     </a>
-                                    <a href="#" class="action action-share" data-action="Share">
+                                    <a  class="action action-share" data-action="Share">
                                         <img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">
                                         <span> Share</span>
                                     </a>
                                 </span>
                             </a>
                         </td>
-                        <td class="filesize" style="color:rgb(160,160,160)">35 kB</td>
+                        <td class="filesize" style="color:rgb(160,160,160)"></td>
                         <td class="date">
                             <span class="modified" title="November 3, 2016 10:11 PM"
-                                  style="color:rgb(0,0,0)">a few seconds ago
+                                  style="color:rgb(0,0,0)">
                             </span>
-                            <a href="#" original-title="Delete"
+                            <a href="#" original-title="Delete" style="background-image: url({{ URL::asset('files/image/delete.svg')}}"
                                class="action delete icon-delete action-delete" data-action="Delete">
                                 <span class="hidden-visually">Delete</span>
                             </a>
                         </td>
                     </tr>
                     @endforeach
-                    {{--@foreach($datas['usersharedata'] as $data)--}}
-                        {{--<tr data-id="3" data-type="dir" data-size="36227" data-file="Documents"--}}
-                            {{--data-mime="httpd/unix-directory" data-mtime="1478185893000" data-etag="581b53a5ee00a"--}}
-                            {{--data-permissions="31" data-share-permissions="31">--}}
-                            {{--<td class="filename ui-draggable ui-droppable">--}}
-                                {{--<a href="#" class="action action-favorite"--}}
-                                   {{--data-action="favorite" original-title="">--}}
-                                    {{--<img class="svg" alt="Favorite" src="{{ URL::asset('files/image/star.svg')}}">--}}
-                                {{--</a>--}}
-                                {{--<input id="select-files-3" type="checkbox" class="selectCheckBox">--}}
-                                {{--<label for="select-files-3">--}}
-                                    {{--<div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;">--}}
-                                    {{--<div class="thumbnail" style="background-size: 32px;">--}}
-                                    {{--</div>--}}
-                                    {{--<span class="hidden-visually">Select</span>--}}
-                                {{--</label>--}}
-                                {{--<a class="name" href="">--}}
-                                {{--<span class="nametext">--}}
-                                    {{--<span class="innernametext">{{$data->nameFile}}</span>--}}
-                                    {{--<a href="#" class="action action-rename" data-action="Rename">--}}
-                                        {{--<img class="svg" alt="Rename" src="{{ URL::asset('files/image/rename.svg')}}">--}}
-                                    {{--</a>--}}
-                                {{--</span>--}}
-                                    {{--<span class="uploadtext" currentuploads="0"></span>--}}
-                                    {{--<span class="fileactions">--}}
-                                    {{--<a href="#" class="action action-download" data-action="Download">--}}
-                                        {{--<img class="svg" alt="" src="{{ URL::asset('files/image/download.svg')}}">--}}
-                                        {{--<span> Download</span>--}}
-                                    {{--</a>--}}
-                                    {{--<a href="#" class="action action-share" data-action="Share">--}}
-                                        {{--<img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">--}}
-                                        {{--<span> Share</span>--}}
-                                    {{--</a>--}}
-                                    {{--<a href="#" class="action action-share permanent" data-action="Share" original-title="">--}}
-                                        {{--<img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">--}}
-                                        {{--<span>{{$data->owner}}</span>--}}
-                                    {{--</a>--}}
-                                {{--</span>--}}
-                                {{--</a>--}}
-                            {{--</td>--}}
-                            {{--<td class="filesize" style="color:rgb(160,160,160)">35 kB</td>--}}
-                            {{--<td class="date">--}}
-                            {{--<span class="modified" title="November 3, 2016 10:11 PM"--}}
-                                  {{--style="color:rgb(0,0,0)">a few seconds ago--}}
-                            {{--</span>--}}
-                                {{--<a href="#" original-title="Delete"--}}
-                                   {{--class="action delete icon-delete action-delete" data-action="Delete">--}}
-                                    {{--<span class="hidden-visually">Delete</span>--}}
-                                {{--</a>--}}
-                            {{--</td>--}}
-                        {{--</tr>--}}
-                    {{--@endforeach--}}
+                    @foreach($datas['usersharedata'] as $data)
+                        <tr data-id="3" data-type="dir" data-size="36227" data-file="Documents"
+                            data-mime="httpd/unix-directory" data-mtime="1478185893000" data-etag="581b53a5ee00a"
+                            data-permissions="31" data-share-permissions="31">
+                            <td class="filename ui-draggable ui-droppable">
+                                <a href="#" class="action action-favorite"
+                                   data-action="favorite" original-title="">
+                                    <img class="svg" alt="Favorite" src="{{ URL::asset('files/image/star.svg')}}">
+                                </a>
+                                <input id="select-files-3" type="checkbox" class="selectCheckBox">
+                                <label for="select-files-3">
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;">
+                                    <div class="thumbnail" style="background-size: 32px;">
+                                    </div>
+                                    <span class="hidden-visually">Select</span>
+                                </label>
+                                <a class="name" href="">
+                                <span class="nametext">
+                                    <span class="innernametext">{{$data->nameFile}}</span>
+                                    <a href="#" class="action action-rename" data-action="Rename">
+                                        <img class="svg" alt="Rename" src="{{ URL::asset('files/image/rename.svg')}}">
+                                    </a>
+                                </span>
+                                    <span class="uploadtext" currentuploads="0"></span>
+                                    <span class="fileactions">
+                                    <a href="#" class="action action-download" data-action="Download">
+                                        <img class="svg" alt="" src="{{ URL::asset('files/image/download.svg')}}">
+                                        <span> Download</span>
+                                    </a>
+                                    <a href="#" class="action action-share" data-action="Share">
+                                        <img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">
+                                        <span> Share</span>
+                                    </a>
+                                    <a href="#" class="action action-share permanent" data-action="Share" original-title="">
+                                        <img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">
+                                        <span>{{$data->owner}}</span>
+                                    </a>
+                                </span>
+                                </a>
+                            </td>
+                            <td class="filesize" style="color:rgb(160,160,160)"></td>
+                            <td class="date">
+                            <span class="modified" title="November 3, 2016 10:11 PM"
+                                  style="color:rgb(0,0,0)">
+                            </span>
+                                <a href="#" original-title="Delete"
+                                   class="action delete icon-delete action-delete" data-action="Delete">
+                                    <span class="hidden-visually">Delete</span>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
 
 
                     </tbody>
@@ -456,12 +397,11 @@
                 <input type="hidden" name="dir" id="dir" value="/" original-title="">
                 <div id="editor"></div>
                 <script>
+
                     $('.action-share').click(function () {
-                        $(this).parent().parent().append("<div id='dropdown' class='drop shareDropDown' data-item-type='file' data-item-source='510' data-item-source-name='ownCloudUserManual.pdf'><label for='shareWith' class='hidden-visually'>Share</label><input id='shareWith' type='text' placeholder='Share with user or group …' class='ui-autocomplete-input' autocomplete='off'><input type='button' class='share_file' value='share'><span role='status' aria-live='polite' class='ui-helper-hidden-accessible'></span><span class='shareWithLoading icon-loading-small hidden'></span><ul id='shareWithList'></ul> <div id='passworderror'>123</div></div>")
+                        $('.shareDropDown').remove();
+                        $(this).parent().parent().append("<div id='dropdown' class='drop shareDropDown' data-item-type='file' data-item-source='510' data-item-source-name='ownCloudUserManual.pdf'><label for='shareWith' class='hidden-visually'>Share</label><input id='shareWith' type='text' placeholder='Share with user or group …' class='ui-autocomplete-input' autocomplete='off'><input type='button' class='share_file' value='share'><span role='status' aria-live='polite' class='ui-helper-hidden-accessible'></span><span class='shareWithLoading icon-loading-small hidden'></span><ul id='shareWithList'></ul> <div id='passworderror'></div></div>")
                     });
-                    $('#filestable').click(function () {
-                        $('#dropdown').hide();
-                    })
 
                     $(document).delegate('.share_file', 'click', function(){
                         var usernameshare = $(this).prev().val();
@@ -482,7 +422,8 @@
 
                                 var dataobj = JSON.parse(data);
 
-                                if(dataobj.code =='200'){
+                                if(dataobj.code =="100"){
+                                    console.log(dataobj.code);
                                     $('#passworderror').html('share success');
                                 }else{
                                     $('#passworderror').html('share error');
@@ -495,7 +436,31 @@
                         });
 
                     });
-//                    "<div id='dropdown' class='drop shareDropDown' data-item-type='file' data-item-source='510' data-item-source-name='ownCloudUserManual.pdf'><label for='shareWith' class='hidden-visually'>Share</label><input id='shareWith' type='text' placeholder='Share with user or group …' class='ui-autocomplete-input' autocomplete='off'><span role='status' aria-live='polite' class='ui-helper-hidden-accessible'></span><span class='shareWithLoading icon-loading-small hidden'></span><ul id='shareWithList'></ul></div>"
+                    $(function() {
+                        $("input:file").change(function (){
+                            var fileName = $(this).val();
+                            console.log(fileName);
+                            var formData = {
+                                fileName: fileName,
+                            }
+                            $.ajax({
+
+                                type: 'GET',
+                                url: '/uploadfile',
+                                data: formData,
+                                dataType: 'json',
+                                success: function (data) {
+                                    console.log(data);
+                                    location.reload();
+                                },
+                                error: function (data) {
+                                    console.log('error');
+                                    console.log('Error:', data);
+                                    location.reload();
+                                }
+                            });
+                        });
+                    });
                 </script>
         <input type="hidden" name="filesApp" id="filesApp" value="1" original-title="">
         <input type="hidden" name="usedSpacePercent" id="usedSpacePercent" value="0" original-title="">
