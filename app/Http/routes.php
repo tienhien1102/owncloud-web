@@ -25,6 +25,7 @@ Route::get('/downloadfilecloud', 'HomeController@downloadFileRead');
 Route::get('/shareother','HomeController@shareWithOther');
 Route::get('/testShow','HomeController@getTestShow');
 Route::get('/uploadfile','HomeController@getUploadfile');
+Route::get('/openfoldercloud', 'HomeController@getOpenFolder');
 
 
 

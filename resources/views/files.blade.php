@@ -293,7 +293,8 @@
                                 </div>
                                 <span class="hidden-visually">Select</span>
                             </label>
-                            <a class="name" href="/openfilecloud?filepath={{$data->pathFile}}">
+                            @if($data->mimeType ==2)
+                            <a class="name" href="/openfoldercloud?folder={{$data->nameFile}}">
                                 <span class="nametext">
                                     <span class="innernametext">{{$data->nameFile}}</span>
                                     <a href="#" class="action action-rename" data-action="Rename">
@@ -312,6 +313,27 @@
                                     </a>
                                 </span>
                             </a>
+                            @else
+                                <a class="name" href="/openfilecloud?filepath={{$data->pathFile}}">
+                                <span class="nametext">
+                                    <span class="innernametext">{{$data->nameFile}}</span>
+                                    <a href="#" class="action action-rename" data-action="Rename">
+                                        <img class="svg" alt="Rename" src="{{ URL::asset('files/image/rename.svg')}}">
+                                    </a>
+                                </span>
+                                    <span class="uploadtext" currentuploads="0"></span>
+                                    <span class="fileactions">
+                                    <a href="/downloadfilecloud?filepath={{$data->pathFile}}" class="action action-download" data-action="Download">
+                                        <img class="svg" alt="" src="{{ URL::asset('files/image/download.svg')}}">
+                                        <span> Download</span>
+                                    </a>
+                                    <a  class="action action-share" data-action="Share">
+                                        <img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">
+                                        <span> Share</span>
+                                    </a>
+                                </span>
+                                </a>
+                            @endif
                         </td>
                         <td class="filesize" style="color:rgb(160,160,160)"></td>
                         <td class="date">
@@ -450,12 +472,12 @@
                                 dataType: 'json',
                                 success: function (data) {
                                     console.log(data);
-//                                    location.reload();
+                                    location.reload();
                                 },
                                 error: function (data) {
                                     console.log('error');
                                     console.log('Error:', data);
-//                                    location.reload();
+                                    location.reload();
                                 }
                             });
                         });
