@@ -269,7 +269,6 @@ class HomeController extends Controller
         $listfilename = array();
         for ($i = 0; $i < $items->length; $i++) {
             if (!(strpos($items->item($i)->nodeValue, 'http') !== false)) {
-                echo $items->item($i)->nodeValue.'</br>';
                 array_push($listfilename, $items->item($i)->nodeValue);
             }
 
