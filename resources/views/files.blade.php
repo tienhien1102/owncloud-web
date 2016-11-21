@@ -247,6 +247,11 @@
                     </tr>
                     </thead>
                     <?php
+                     function getFileExtension($file_name){
+                         $list_split = explode(".",$file_name);
+                         $type = $list_split[count($list_split)-1];
+                         return $type;
+                     }
                     function getTypeFile($file_name){
 
                         if (strpos($file_name, '.') == false) {
@@ -289,8 +294,15 @@
                             </a>
                             <input id="select-files-3" type="checkbox" class="selectCheckBox">
                             <label for="select-files-3">
-                                <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;">
-                                </div>
+
+                                @if (in_array(getFileExtension($data->nameFile), array("png","jpg","gif")))
+                                    {{--<div class="thumbnail" style="background-image: url('http://45.76.151.128/owncloud/data/{{session('current_user') }}/{{ $data->pathFile}}'); background-size: 32px;"> </div>--}}
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image/icon_image.png')}}); background-size: 32px;"> </div>
+                                @else
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;"> </div>
+                                @endif
+
+
                                 <span class="hidden-visually">Select</span>
                             </label>
                             @if($data->mimeType ==2)

@@ -143,7 +143,7 @@
 </nav>
 
 <div>
-    @if($data['type']=='jpg')
+    @if(in_array($data['type'],array("jpg", "png", "svg", "jpeg", "gif")))
         <div id="slideshow" class="icon-loading-dark" style="display: block; background-position: -10000px 0px;">
             <input type="button" class="svg next icon-view-next" value="Next" style="display: none;">
             <input type="button" class="svg play icon-view-play" value="Play" style="display: inline-block;">
