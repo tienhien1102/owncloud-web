@@ -26,8 +26,8 @@ Route::get('/shareother','HomeController@shareWithOther');
 Route::get('/testShow','HomeController@getTestShow');
 Route::get('/uploadfile','HomeController@getUploadfile');
 Route::get('/openfoldercloud', 'HomeController@getOpenFolder');
-
-
+Route::get('/createfolder', 'HomeController@getCreatefolder');
+Route::get('/deletefilefolder', 'HomeController@getDeletefilefolder');
 
 //Route::get('/singin', function () {
 //    return view('login');

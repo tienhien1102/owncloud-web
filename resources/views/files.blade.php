@@ -158,16 +158,26 @@
                     </div>
                     <div class="actions creatable">
                         <div id="new" class="button">
-                            <a>New</a>
-                            <ul style="display: none;">
-                                <li class="icon-filetype-text svg" data-type="file" data-newname="New text file.txt">
-                                    <p>Text file</p>
-                                </li>
+                            <a id="link_click_new">New Folder</a>
+                            <ul id="form_create" style="display: none;">
+
                                 <li class="icon-filetype-folder svg" data-type="folder" data-newname="New folder">
-                                    <p>Folder</p>
+
+                                    <input type="input" style="height:32px;margin-right: 10px" id="forlder_name_add" original-title=""><button id="create_folder" style="margin-right: 5px">create</button> <button id="cancel_folder">Cancel</button>
+                                    <label >
+                                        <span class="hidden-visually">Create</span>
+                                    </label>
                                 </li>
                             </ul>
                         </div>
+                        <script>
+                           $('#link_click_new').click(function () {
+                               $('#form_create').show();
+                           })
+                           $('#cancel_folder').click(function () {
+                               $('#form_create').hide();
+                           })
+                        </script>
                         <div id="upload" class="button" original-title="Upload (max. 513 MB)">
                             <input type="hidden" id="max_upload" name="MAX_FILE_SIZE" value="537919488"
                                    original-title="">
@@ -247,6 +257,7 @@
                     </tr>
                     </thead>
                     <?php
+
                      function getFileExtension($file_name){
                          $list_split = explode(".",$file_name);
                          $type = $list_split[count($list_split)-1];
@@ -284,7 +295,7 @@
                     ?>
                     <tbody id="fileList">
                     @foreach($datas['userdata'] as $data)
-                    <tr data-id="3" data-type="dir" data-size="36227" data-file="{{$data->nameFile}}"
+                    <tr data-id="3" data-type="dir" data-size="36227" data-file="{{$data['pathFile']}}"
                         data-mime="httpd/unix-directory" data-mtime="1478185893000" data-etag="581b53a5ee00a"
                         data-permissions="31" data-share-permissions="31">
                         <td class="filename ui-draggable ui-droppable">
@@ -295,27 +306,27 @@
                             <input id="select-files-3" type="checkbox" class="selectCheckBox">
                             <label for="select-files-3">
 
-                                @if (in_array(getFileExtension($data->nameFile), array("png","jpg","gif")))
+                                @if (in_array(getFileExtension($data['nameFile']), array("png","jpg","gif")))
                                     {{--<div class="thumbnail" style="background-image: url('http://45.76.151.128/owncloud/data/{{session('current_user') }}/{{ $data->pathFile}}'); background-size: 32px;"> </div>--}}
                                     <div class="thumbnail" style="background-image: url({{ URL::asset('files/image/icon_image.png')}}); background-size: 32px;"> </div>
                                 @else
-                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;"> </div>
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data['nameFile'])}}); background-size: 32px;"> </div>
                                 @endif
 
 
                                 <span class="hidden-visually">Select</span>
                             </label>
-                            @if($data->mimeType ==2)
-                            <a class="name" href="/openfoldercloud?folder={{$data->nameFile}}">
+                            @if(strpos($data['nameFile'], '.') == false)
+                            <a class="name" href="/openfoldercloud?folder={{$data['pathFile']}}">
                                 <span class="nametext">
-                                    <span class="innernametext">{{$data->nameFile}}</span>
+                                    <span class="innernametext">{{$data['nameFile']}}</span>
                                     <a href="#" class="action action-rename" data-action="Rename">
                                         <img class="svg" alt="Rename" src="{{ URL::asset('files/image/rename.svg')}}">
                                     </a>
                                 </span>
                                 <span class="uploadtext" currentuploads="0"></span>
                                 <span class="fileactions">
-                                    <a href="/downloadfilecloud?filepath={{$data->pathFile}}" class="action action-download" data-action="Download">
+                                    <a href="/downloadfilecloud?filepath={{$data['pathFile']}}" class="action action-download" data-action="Download">
                                         <img class="svg" alt="" src="{{ URL::asset('files/image/download.svg')}}">
                                         <span> Download</span>
                                     </a>
@@ -326,16 +337,16 @@
                                 </span>
                             </a>
                             @else
-                                <a class="name" href="/openfilecloud?filepath={{$data->pathFile}}">
+                                <a class="name" href="/openfilecloud?filepath={{$data['pathFile']}}">
                                 <span class="nametext">
-                                    <span class="innernametext">{{$data->nameFile}}</span>
+                                    <span class="innernametext">{{$data['nameFile']}}</span>
                                     <a href="#" class="action action-rename" data-action="Rename">
                                         <img class="svg" alt="Rename" src="{{ URL::asset('files/image/rename.svg')}}">
                                     </a>
                                 </span>
                                     <span class="uploadtext" currentuploads="0"></span>
                                     <span class="fileactions">
-                                    <a href="/downloadfilecloud?filepath={{$data->pathFile}}" class="action action-download" data-action="Download">
+                                    <a href="/downloadfilecloud?filepath={{$data['pathFile']}}" class="action action-download" data-action="Download">
                                         <img class="svg" alt="" src="{{ URL::asset('files/image/download.svg')}}">
                                         <span> Download</span>
                                     </a>
@@ -352,9 +363,9 @@
                             <span class="modified" title="November 3, 2016 10:11 PM"
                                   style="color:rgb(0,0,0)">
                             </span>
-                            <a href="#" original-title="Delete" style="background-image: url({{ URL::asset('files/image/delete.svg')}}"
+                            <a onclick="deletefilefolder('{{$data['pathFile']}}')" original-title="Delete" style="background-image: url({{ URL::asset('files/image/delete.svg')}}"
                                class="action delete icon-delete action-delete" data-action="Delete">
-                                <span class="hidden-visually">Delete</span>
+                                <span class="hidden-visually" >Delete</span>
                             </a>
                         </td>
                     </tr>
@@ -370,13 +381,13 @@
                                 </a>
                                 <input id="select-files-3" type="checkbox" class="selectCheckBox">
                                 <label for="select-files-3">
-                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;"></div>
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->filepath)}}); background-size: 32px;"></div>
                                     <div class="thumbnail" style="background-size: 32px;"></div>
                                     <span class="hidden-visually">Select</span>
                                 </label>
                                 <a class="name" href="">
                                 <span class="nametext">
-                                    <span class="innernametext">{{$data->nameFile}}</span>
+                                    <span class="innernametext">{{$data->filepath}}</span>
                                     <a href="#" class="action action-rename" data-action="Rename">
                                         <img class="svg" alt="Rename" src="{{ URL::asset('files/image/rename.svg')}}">
                                     </a>
@@ -385,11 +396,11 @@
                                     <span class="fileactions">
                                     <a href="#" class="action action-download" data-action="Download">
                                         <img class="svg" alt="" src="{{ URL::asset('files/image/download.svg')}}">
-                                        <span> Download</span>
+                                        <span> </span>
                                     </a>
                                     <a href="#" class="action action-share" data-action="Share">
                                         <img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">
-                                        <span> Share</span>
+                                        <span> </span>
                                     </a>
                                     <a href="#" class="action action-share permanent" data-action="Share" original-title="">
                                         <img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">
@@ -439,6 +450,7 @@
                     $(document).delegate('.share_file', 'click', function(){
                         var usernameshare = $(this).prev().val();
                         var pathfile    = $(this).parent().parent().parent().attr('data-file');
+//                        console(pathfile);
                         var formData = {
                             usernameshare: usernameshare,
                             pathfile: pathfile,
@@ -494,6 +506,54 @@
                             });
                         });
                     });
+                    function deletefilefolder(pathfile) {
+
+                        var formData = {
+                            pathfile: pathfile,
+                        }
+                        $.ajax({
+
+                            type: 'GET',
+                            url: '/deletefilefolder',
+                            data: formData,
+                            dataType: 'json',
+                            success: function (data) {
+                                console.log(data);
+                                location.reload();
+                            },
+                            error: function (data) {
+                                console.log('error');
+                                console.log('Error:', data);
+                                location.reload();
+                            }
+                        });
+                    }
+                    $('#create_folder').click(function () {
+                        var folder_name = $('#forlder_name_add').val();
+                       if(folder_name==''){
+                           return
+                       }else {
+                           var formData = {
+                               foldername: folder_name,
+                           }
+                           $.ajax({
+
+                               type: 'GET',
+                               url: '/createfolder',
+                               data: formData,
+                               dataType: 'json',
+                               success: function (data) {
+                                   console.log(data);
+                                   location.reload();
+                               },
+                               error: function (data) {
+                                   console.log('error');
+                                   console.log('Error:', data);
+                                   location.reload();
+                               }
+                           });
+                       }
+                    })
                 </script>
         <input type="hidden" name="filesApp" id="filesApp" value="1" original-title="">
         <input type="hidden" name="usedSpacePercent" id="usedSpacePercent" value="0" original-title="">

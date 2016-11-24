@@ -267,13 +267,13 @@
                                 </a>
                                 <input id="select-files-3" type="checkbox" class="selectCheckBox">
                                 <label for="select-files-3">
-                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->nameFile)}}); background-size: 32px;">
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->filepath)}}); background-size: 32px;">
                                     </div>
                                     <span class="hidden-visually">Select</span>
                                 </label>
                                 <a class="name" href="">
                                 <span class="nametext">
-                                    <span class="innernametext">{{$data->nameFile}}</span>
+                                    <span class="innernametext">{{$data->filepath}}</span>
                                     <a href="#" class="action action-rename" data-action="Rename">
                                         <img class="svg" alt="Rename" src="{{ URL::asset('files/image/rename.svg')}}">
                                     </a>

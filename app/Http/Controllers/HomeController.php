@@ -44,6 +44,7 @@ class HomeController extends Controller
 
         //test start
         session(['current_path' => '']);
+        session(['current_folder' => '']);
         $authen = session('current_user') . ':' . session('current_password');
         $ch = curl_init('');
         curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/');
@@ -53,7 +54,7 @@ class HomeController extends Controller
 //        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 
         $response = curl_exec($ch);
-//     dd($userdatadecode);
+//        dd($response);
         $DOM = new \DOMDocument();
         $DOM->loadHTML($response);
         //get all H1
@@ -61,11 +62,15 @@ class HomeController extends Controller
         $listfilename = array();
         for ($i = 0; $i < $items->length; $i++) {
             if (!(strpos($items->item($i)->nodeValue, 'http') !== false)) {
-                array_push($listfilename, $items->item($i)->nodeValue);
+                $array = array('nameFile' => $items->item($i)->nodeValue,
+                               'pathFile' => str_replace('/owncloud/remote.php/webdav/','',$items->item($i)->getAttribute('href')),
+                                );
+//                $arrayobject = new ArrayObject($array);
+                array_push($listfilename, $array);
             }
 
         }
-
+//        dd($listfilename);
         $userdatadecode_temp = array();
         for ($i = 0; $i < count($userdatadecode); $i++){
             for ($j=0;$j< count($listfilename);$j++){
@@ -86,7 +91,7 @@ class HomeController extends Controller
 //        }
        //test end
 //
-        $response = array("userdata" => $userdatadecode, "usersharedata" => $usersharedatacode);
+        $response = array("userdata" => $listfilename, "usersharedata" => $usersharedatacode);
         return view('files')->with('datas', $response);
     }
 
@@ -186,7 +191,7 @@ class HomeController extends Controller
         $data = $request->input();
         $usernameshare = $data['usernameshare'];
         $filepath = $data['pathfile'];
-        $query_get = 'http://45.76.151.128:12351/usersharetouserdata?username=' . session('current_user') . '&password=' . session('current_password') . '&pathfile=' . $filepath . '&usernameforshare=' . $usernameshare;
+        $query_get = 'http://45.76.151.128:12351/usersharetouserdata?username=' . session('current_user') . '&password=' . session('current_password') . '&pathfile=' .  $filepath . '&usernameforshare=' . $usernameshare;
         $result = CallAPI('GET', $query_get);
         return response()->json($result);
 
@@ -209,7 +214,7 @@ class HomeController extends Controller
     {
         $data = $request->input();
         $filepath = 'http://45.76.151.128/owncloud/data/' . session('current_user') . '/' . $data['filepath'];
-
+        dd($filepath);
         $list_split = explode(".", $filepath);
         $type = $list_split[count($list_split) - 1];
 
@@ -235,57 +240,42 @@ class HomeController extends Controller
         $data = $request->input();
         $foldername =  $data['folder'];
         session(['current_path' => $foldername]);
-
-        $userdata = CallAPI('GET', 'http://45.76.151.128:12351/usergetdata?username=' . session('current_user'));
-        $usersharedata = CallAPI('GET', 'http://45.76.151.128:12351/usergetsharedata?username=' . session('current_user'));
-        if (json_decode($userdata)->code != "200") {
-            $userdatadecode = [];
-        } else {
-            $userdatadecode = json_decode($userdata)->message;
-        }
-        if (json_decode($usersharedata)->code != "200") {
-            $usersharedatacode = [];
-        } else {
-            $usersharedatacode = json_decode($usersharedata)->message;
-        }
-
-        //test start
-
+//        dd($foldername);
         $authen = session('current_user') . ':' . session('current_password');
         $ch = curl_init('');
-        curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/'.$foldername);
+        if(isset(   $foldername)){
+            curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/'.$foldername);
+        }else{
+            curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/');
+        }
+
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_USERPWD, $authen);
         curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 //        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
 
         $response = curl_exec($ch);
-//     dd($userdatadecode);
+//        dd($response);
         $DOM = new \DOMDocument();
         $DOM->loadHTML($response);
-//        dd($DOM);
         //get all H1
         $items = $DOM->getElementsByTagName('a');
         $listfilename = array();
         for ($i = 0; $i < $items->length; $i++) {
             if (!(strpos($items->item($i)->nodeValue, 'http') !== false)) {
-                array_push($listfilename, $items->item($i)->nodeValue);
+                if($items->item($i)->nodeValue!='..'){
+                    $array = array('nameFile' => $items->item($i)->nodeValue,
+                        'pathFile' => str_replace('/owncloud/remote.php/webdav/','',$items->item($i)->getAttribute('href')),
+                    );
+                    array_push($listfilename, $array);
+                }
+
             }
 
         }
-        $userdatadecode_temp = array();
-        for ($i = 0; $i < count($userdatadecode); $i++){
-            for ($j=0;$j< count($listfilename);$j++){
 
-                if ($userdatadecode[$i]->nameFile == $listfilename[$j] )
-
-                        array_push($userdatadecode_temp,$userdatadecode[$i]);
-
-            }
-        }
-        $userdatadecode = $userdatadecode_temp;
-
-        $response = array("userdata" => $userdatadecode, "usersharedata" => $usersharedatacode);
+        $usersharedatacode =[];
+        $response = array("userdata" => $listfilename, "usersharedata" => $usersharedatacode);
         return view('files')->with('datas', $response);
 
 
@@ -342,6 +332,7 @@ class HomeController extends Controller
         $data = array($filenameshort => $filename);
 
         $authen = session('current_user').':'.session('current_password');
+
         $ch = curl_init('');
         if(session('current_path')==''){
            $url = curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/'.$filenameshort);
@@ -363,4 +354,21 @@ class HomeController extends Controller
 
 
     }
+
+    function getCreatefolder(Request $request){
+        $data = $request->input();
+        $filename = $data['foldername'];
+        $result = shell_exec('curl -X MKCOL "http://45.76.151.128/owncloud/remote.php/webdav/'.session('current_path').'/'.$filename.'" -k -u '.session('current_user').':'.session('current_password'));
+        return response()->json($filename);
+
+    }
+    function getDeletefilefolder(Request $request){
+        $data = $request->input();
+        $pathfile = $data['pathfile'];
+        $result = shell_exec('curl -X DELETE -u '.session('current_user').':'.session('current_password').'  http://45.76.151.128/owncloud/remote.php/webdav/'.$pathfile);
+        return response()->json($result);
+
+    }
+
+
 }
