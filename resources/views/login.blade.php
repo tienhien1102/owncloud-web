@@ -28,7 +28,7 @@
     <div class="v-align">
         <header role="banner">
             <div id="header">
-                <div class="logo svg" style="background-image: url({{ URL::asset('login/image/login_logo.jpg') }});width: 350px;height: 150px">
+                <div class="logo svg" style="background-image: url({{ URL::asset('login/image/login_cloud.jpg') }});width: 350px;height: 150px;margin-left: 20px">
                     <h1 class="hidden-visually">Study and Share</h1>
                 </div>
                 <div id="logo-claim" style="display:none;"></div>
