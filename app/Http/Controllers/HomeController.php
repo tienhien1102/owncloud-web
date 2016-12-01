@@ -91,7 +91,7 @@ class HomeController extends Controller
 //        }
        //test end
 //
-        $response = array("userdata" => $listfilename, "usersharedata" => $usersharedatacode);
+        $response = array("userdata" => $listfilename, "usersharedata" => []);
         return view('files')->with('datas', $response);
     }
 
@@ -213,8 +213,8 @@ class HomeController extends Controller
     function openFileRead(Request $request)
     {
         $data = $request->input();
-        $filepath = 'http://45.76.151.128/owncloud/data/' . session('current_user') . '/' . $data['filepath'];
-        dd($filepath);
+        $filepath = 'http://45.76.151.128/owncloud/data/' . session('current_user') . '/files/' . $data['filepath'];
+//        dd($filepath);
         $list_split = explode(".", $filepath);
         $type = $list_split[count($list_split) - 1];
 
@@ -370,5 +370,21 @@ class HomeController extends Controller
 
     }
 
+    function  getCommentfiledata(Request $request){
+        $data = $request->input();
+        $filecomment = $data['filecomment'];
+//        $list_group = CallAPI('GET', 'http://45.76.151.128:12351/addcommentdata?username='.session('current_user').'&keyfile='.$filecomment.'&comment=');
+        $result = CallAPI('GET', 'http://45.76.151.128:12351/getcommentdata?keyfile='.$filecomment);
+        return response()->json($result);
+    }
+    function  getAddcommentdata(Request $request){
+        $data = $request->input();
+        $filecomment = $data['filecomment'];
+        $comment_content = $data['comment_content'];
+        str_replace(" ","%20",$comment_content);
+        $result = CallAPI('GET', 'http://45.76.151.128:12351/addcommentdata?username='.session('current_user').'&keyfile='.$filecomment.'&comment='.str_replace(" ","%20",$comment_content));
+
+        return response()->json($result);
+    }
 
 }

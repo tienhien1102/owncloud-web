@@ -105,6 +105,77 @@
         </form>
     </div>
 </header>
+<style>
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 999; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 50%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @-webkit-keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    @keyframes animatetop {
+        from {top:-300px; opacity:0}
+        to {top:0; opacity:1}
+    }
+
+    /* The Close Button */
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #5cb85c;
+        color: white;
+    }
+
+    .modal-body {padding: 2px 16px;}
+
+    .modal-footer {
+        padding: 2px 16px;
+        background-color: #5cb85c;
+        color: white;
+    }
+</style>
 
 <nav role="navigation">
     <div id="navigation" class="menu" style="display: none;">
@@ -354,9 +425,15 @@
                                         <img class="svg" alt="" src="{{ URL::asset('files/image/share.svg')}}">
                                         <span> Share</span>
                                     </a>
+                                   <a  onclick="getComment('{{$data['pathFile']}}')" class="action " data-action="Share">
+                                        <img class="svg" alt="">
+                                        <span> Comment</span>
+                                    </a>
+
                                 </span>
                                 </a>
                             @endif
+
                         </td>
                         <td class="filesize" style="color:rgb(160,160,160)"></td>
                         <td class="date">
@@ -370,6 +447,87 @@
                         </td>
                     </tr>
                     @endforeach
+                    <script>
+//
+
+                        // When the user clicks on <span> (x), close the modal
+
+                        var filecomment_public = ''
+
+                        function getComment(filecomment) {
+                              var modal = document.getElementById('myModal');
+                              modal.style.display = "block";
+                            $('.modal-body').html('');
+                              filecomment_public = filecomment
+                            var formData = {
+                                filecomment: filecomment_public,
+                            }
+                            $.ajax({
+
+                                type: 'GET',
+                                url: '/commentfiledata',
+                                data: formData,
+                                dataType: 'json',
+                                success: function (data) {
+                                    var dataobj = JSON.parse(data);
+                                    if(dataobj.code=="200"){
+                                       var comments =  dataobj.message;
+                                       for(var i =0; i< comments.length;i++){
+                                           $('.modal-body').append('<p>'+'<b>'+comments[i].username+'</b> :'+comments[i].comment+'</p>');
+                                       }
+
+                                    }
+                                    console.log(data);
+
+                                },
+                                error: function (data) {
+                                    console.log('error');
+                                    console.log('Error:', data);
+
+                                }
+                            });
+                            $('.close').click(function () {
+                                var modal = document.getElementById('myModal');
+                                modal.style.display = "none";
+                            })
+                        }
+
+                        function addcomment() {
+                            var formData = {
+                                filecomment: filecomment_public,
+                                comment_content : $('#comment_textarea').val()
+                            }
+//                            console.log( $('#comment_textarea').val())
+                            if($('#comment_textarea').val()==""){
+                                alert('content comment not null')
+                                return;
+                            }
+                            $.ajax({
+
+                                type: 'GET',
+                                url: '/addcommentdata',
+                                data: formData,
+                                dataType: 'json',
+                                success: function (data) {
+                                    var dataobj = JSON.parse(data);
+                                    if(dataobj.code=="200"){
+                                        $('.modal-body').append('<p><b>{{session('current_user')}}</b> :'+$('#comment_textarea').val()+'</p>');
+                                    }else {
+                                        $('.modal-body').append('<p style="color:red">comment error!</p>')
+                                    }
+                                    $('#comment_textarea').val('')
+                                    console.log(data);
+
+                                },
+                                error: function (data) {
+                                    console.log('error');
+                                    console.log('Error:', data);
+                                    $('#comment_textarea').val('')
+
+                                }
+                            });
+                        }
+                    </script>
                     @foreach($datas['usersharedata'] as $data)
                         <tr data-id="3" data-type="dir" data-size="36227" data-file="Documents"
                             data-mime="httpd/unix-directory" data-mtime="1478185893000" data-etag="581b53a5ee00a"
@@ -554,6 +712,8 @@
                            });
                        }
                     })
+
+
                 </script>
         <input type="hidden" name="filesApp" id="filesApp" value="1" original-title="">
         <input type="hidden" name="usedSpacePercent" id="usedSpacePercent" value="0" original-title="">
@@ -566,7 +726,38 @@
     </div>
 </div>
 
+        <div id="myModal" class="modal">
 
+            <!-- Modal content -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">×</span>
+                    <h2>Comment</h2>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="container">
+                    <textarea id="comment_textarea" placeholder="type comment" style="width: 75%; margin-left: 10px;"></textarea><span><button style="float: right; margin-top: 15px;margin-right: 10px;" onclick="addcomment()">Add Comment</button></span>
+
+                </div>
+
+                <div class="modal-footer">
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <script>
+
+            // Get the modal
+
+
+            // Get the button that opens the modal
+
+        </script>
 <div id="cboxOverlay" style="opacity: 1; cursor: auto; display: none;"></div>
 <div id="colorbox" class=""
      style="padding-bottom: 20px; padding-right: 0px; top: 98px; left: 199px; position: absolute; width: 926px; height: 438px; opacity: 1; cursor: auto; display: none;">
@@ -606,6 +797,9 @@
     <div class="progress icon-view-pause"></div>
 </div>
 <div class="dummy-fileactions hidden"></div>
-<script src="{{ URL::asset('files/js/inject_jq.js')}}"></script>
+
+</div>
+</div>
+        <script src="{{ URL::asset('files/js/inject_jq.js')}}"></script>
 </body>
 </html>
