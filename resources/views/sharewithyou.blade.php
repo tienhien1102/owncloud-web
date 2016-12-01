@@ -224,6 +224,11 @@
                     </tr>
                     </thead>
                     <?php
+                    function getFileName($file_path){
+                        $list_split = explode("/",$file_path);
+                        $type = $list_split[count($list_split)-1];
+                        return $type;
+                    }
                     function getTypeFile($file_name){
 
                         if (strpos($file_name, '.') == false) {
@@ -273,7 +278,7 @@
                                 </label>
                                 <a class="name" href="">
                                 <span class="nametext">
-                                    <span class="innernametext">{{$data->filepath}}</span>
+                                    <span class="innernametext">{{getFileName($data->filepath)}}</span>
                                     <a href="#" class="action action-rename" data-action="Rename">
                                         <img class="svg" alt="Rename" src="{{ URL::asset('files/image/rename.svg')}}">
                                     </a>
