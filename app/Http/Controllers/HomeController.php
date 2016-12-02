@@ -55,16 +55,18 @@ class HomeController extends Controller
 
         $response = curl_exec($ch);
 //        dd($response);
-        $DOM = new \DOMDocument();
+            $DOM = new \DOMDocument();
         $DOM->loadHTML($response);
         //get all H1
         $items = $DOM->getElementsByTagName('a');
         $listfilename = array();
         for ($i = 0; $i < $items->length; $i++) {
             if (!(strpos($items->item($i)->nodeValue, 'http') !== false)) {
+                $parent_node = $items->item($i)->parentNode->nextSibling->nextSibling->nodeValue;
                 $array = array('nameFile' => $items->item($i)->nodeValue,
                                'pathFile' => str_replace('/owncloud/remote.php/webdav/','',$items->item($i)->getAttribute('href')),
-                                );
+                               'typeFile' =>  $parent_node,
+                    );
 //                $arrayobject = new ArrayObject($array);
                 array_push($listfilename, $array);
             }
@@ -83,7 +85,7 @@ class HomeController extends Controller
             }
         }
         $userdatadecode = $userdatadecode_temp;
-//        dd($userdatadecode);
+//        dd($userdatadecode_temp);
 
 
 //        if(!$response) {
@@ -263,10 +265,12 @@ class HomeController extends Controller
         $listfilename = array();
         for ($i = 0; $i < $items->length; $i++) {
             if (!(strpos($items->item($i)->nodeValue, 'http') !== false)) {
-                if($items->item($i)->nodeValue!='..'){
-                    $array = array('nameFile' => $items->item($i)->nodeValue,
-                        'pathFile' => str_replace('/owncloud/remote.php/webdav/','',$items->item($i)->getAttribute('href')),
-                    );
+                $parent_node = $items->item($i)->parentNode->nextSibling->nextSibling->nodeValue;
+                $array = array('nameFile' => $items->item($i)->nodeValue,
+                    'pathFile' => str_replace('/owncloud/remote.php/webdav/','',$items->item($i)->getAttribute('href')),
+                    'typeFile' =>  $parent_node,
+                );
+                if($array['nameFile'] != '..'){
                     array_push($listfilename, $array);
                 }
 
@@ -330,26 +334,37 @@ class HomeController extends Controller
         $list_split = explode("\\",$filename);
         $filenameshort = $list_split[count($list_split)-1];
         $data = array($filenameshort => $filename);
-
-        $authen = session('current_user').':'.session('current_password');
-
-        $ch = curl_init('');
+//        $filename = str_replace("C:\\fakepath\\","",$filename);
+//        $real_path_string = './'.$filenameshort;
+//        $real_path  = realpath($real_path_string);
+//
+//        $authen = session('current_user').':'.session('current_password');
+//
+//        $ch = curl_init('');
+//        if(session('current_path')==''){
+//           $url = curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/'.$filenameshort);
+//        }else{
+//            $url = curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/'.session('current_path').'/'.$filenameshort);
+//        }
+//
+//        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//        curl_setopt($ch, CURLOPT_USERPWD,$authen );
+//        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+//        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+//        curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
+//
+//        $response = curl_exec($ch);
+//        return response()->json($filenameshort);
         if(session('current_path')==''){
-           $url = curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/'.$filenameshort);
-        }else{
-            $url = curl_setopt($ch, CURLOPT_URL, 'http://45.76.151.128/owncloud/remote.php/webdav/'.session('current_path').'/'.$filenameshort);
+            $url = 'curl -X PUT -u '.session('current_user').':'.session('current_password').' "http://45.76.151.128/owncloud/remote.php/webdav/'.$filenameshort.'"  --data-binary @"'.$filename.'"';
+        }
+        else{
+            $url = 'curl -X PUT -u '.session('current_user').':'.session('current_password').' "http://45.76.151.128/owncloud/remote.php/webdav/'.session('current_path').'/'.$filenameshort.'" --data-binary @"'.$filename.'"';
         }
 
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_USERPWD,$authen );
-        curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-        curl_setopt($ch, CURLOPT_POSTFIELDS,http_build_query($data));
-
-        $response = curl_exec($ch);
-//        return response()->json($filenameshort);
+        $response = shell_exec($url);
         if(!$response) {
-            return response()->json($url);
+            return response()->json($real_path_string);
         }
 
 

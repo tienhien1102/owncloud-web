@@ -334,9 +334,9 @@
                          $type = $list_split[count($list_split)-1];
                          return $type;
                      }
-                    function getTypeFile($file_name){
+                    function getTypeFile($file_name, $typefile){
 
-                        if (strpos($file_name, '.') == false) {
+                        if ($typefile=="Collection") {
                             return 'file_folder.svg';
 
                         }else{
@@ -381,13 +381,13 @@
                                     {{--<div class="thumbnail" style="background-image: url('http://45.76.151.128/owncloud/data/{{session('current_user') }}/{{ $data->pathFile}}'); background-size: 32px;"> </div>--}}
                                     <div class="thumbnail" style="background-image: url({{ URL::asset('files/image/icon_image.png')}}); background-size: 32px;"> </div>
                                 @else
-                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data['nameFile'])}}); background-size: 32px;"> </div>
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data['nameFile'],$data['typeFile'])}}); background-size: 32px;"> </div>
                                 @endif
 
 
                                 <span class="hidden-visually">Select</span>
                             </label>
-                            @if(strpos($data['nameFile'], '.') == false)
+                            @if($data['typeFile'] == 'Collection')
                             <a class="name" href="/openfoldercloud?folder={{$data['pathFile']}}">
                                 <span class="nametext">
                                     <span class="innernametext">{{$data['nameFile']}}</span>
@@ -539,7 +539,7 @@
                                 </a>
                                 <input id="select-files-3" type="checkbox" class="selectCheckBox">
                                 <label for="select-files-3">
-                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data->filepath)}}); background-size: 32px;"></div>
+                                    <div class="thumbnail" style="background-image: url({{ URL::asset('files/image')}}/{{getTypeFile($data['nameFile'],'')}}); background-size: 32px;"></div>
                                     <div class="thumbnail" style="background-size: 32px;"></div>
                                     <span class="hidden-visually">Select</span>
                                 </label>
