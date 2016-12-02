@@ -331,7 +331,7 @@ class HomeController extends Controller
         $data = $request->input();
         $filename = $data['fileName'];
 //         $command ='curl -X PUT -u hai213k57@gmail.com:hainv "http://45.76.151.128/owncloud/remote.php/webdav/Documents/" -F myfile=@"'.$filename;
-        $list_split = explode("\\",$filename);
+        $list_split = explode("/",$filename);
         $filenameshort = $list_split[count($list_split)-1];
         $data = array($filenameshort => $filename);
 //        $filename = str_replace("C:\\fakepath\\","",$filename);
@@ -363,8 +363,9 @@ class HomeController extends Controller
         }
 
         $response = shell_exec($url);
+        return response()->json($url);
         if(!$response) {
-            return response()->json($real_path_string);
+            return response()->json($url);
         }
 
 

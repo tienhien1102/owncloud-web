@@ -249,14 +249,10 @@
                                $('#form_create').hide();
                            })
                         </script>
-                        <div id="upload" class="button" original-title="Upload (max. 513 MB)">
-                            <input type="hidden" id="max_upload" name="MAX_FILE_SIZE" value="537919488"
-                                   original-title="">
-                            <input type="hidden" id="upload_limit" value="537919488" original-title="">
-                            <input type="hidden" id="free_space" value="178767515648" original-title="">
-                            <input type="hidden" class="max_human_file_size" value="(max )" original-title="">
-                            <input type="file" id="file_upload_start" name="files[]" data-url="" original-title=""
-                                   multiple="multiple" >
+
+                        <input type="text" id="file_upload_path" style="width: 300px;margin-left: 50px;"/>
+                        <div id="upload" class="button">
+
                             <label for="file_upload_start" style="background-image: url({{ URL::asset('login/image/upload.svg') }})" class="svg icon-upload">
                                 <span class="hidden-visually">Upload</span>
                             </label>
@@ -640,9 +636,13 @@
 
                     });
                     $(function() {
-                        $("input:file").change(function (){
-                            var fileName = $(this).val();
+                        $("#upload").click(function (){
+                            var fileName = $('#file_upload_path').val();
                             console.log(fileName);
+                           if(fileName==''){
+                               alert('path file incorrect!')
+                               return;
+                           }
                             var formData = {
                                 fileName: fileName,
                             }
