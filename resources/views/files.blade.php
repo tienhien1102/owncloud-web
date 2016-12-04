@@ -240,7 +240,19 @@
                                     </label>
                                 </li>
                             </ul>
+
                         </div>
+                        <div class="button">
+                            <form action="http://45.58.54.200/service/uploader.php" method="POST" enctype="multipart/form-data">
+                                <input id="fileserviceupload" type="file" name="image" />
+                                <input type="submit" style="height: 25px;"/>
+
+                            </form>
+                        </div>
+                        <div class="button">
+                            <input id="uploadphp" type="button" value="upload">
+                        </div>
+
                         <script>
                            $('#link_click_new').click(function () {
                                $('#form_create').show();
@@ -250,19 +262,57 @@
                            })
                         </script>
 
-                        <input type="text" id="file_upload_path" style="width: 300px;margin-left: 50px;"/>
-                        <div id="upload" class="button">
+                        {{--<input type="file" id="file_upload_path" style="width: 300px;margin-left: 50px;"/>--}}
+                        {{--<div id="upload" class="button">--}}
 
-                            <label for="file_upload_start" style="background-image: url({{ URL::asset('login/image/upload.svg') }})" class="svg icon-upload">
-                                <span class="hidden-visually">Upload</span>
-                            </label>
-                        </div>
+                            {{--<label for="file_upload_start" style="background-image: url({{ URL::asset('login/image/upload.svg') }})" class="svg icon-upload">--}}
+                                {{--<span class="hidden-visually">Upload</span>--}}
+                            {{--</label>--}}
+                        {{--</div>--}}
+
+
                         <div id="uploadprogresswrapper">
                             <div id="uploadprogressbar"></div>
                             <button class="stop icon-close" style="display:none">
                                 <span class="hidden-visually">Cancel upload	</span>
                             </button>
                         </div>
+                        <script>
+                            $("form").submit(function(){
+                                 var filename = $('#fileserviceupload').val();
+                                filename = filename.replace('C:\\fakepath\\','');
+                                localStorage.setItem('filename',filename);
+
+//                                alert(localStorage.getItem('filename'));
+                            });
+                            $('#uploadphp').click(function () {
+                                filename =  localStorage.getItem('filename');
+                                if(filename==''){
+                                    alert('path file incorrect!')
+                                    return;
+                                }
+                                var formData = {
+                                    fileName: filename,
+                                }
+                                $.ajax({
+
+                                type: 'GET',
+                                url: '/uploadfile',
+                                data: formData,
+                                dataType: 'json',
+                                success: function (data) {
+                                    console.log(data);
+                                    location.reload();
+                                },
+                                error: function (data) {
+                                    console.log('error');
+                                    console.log('Error:', data);
+                                    location.reload();
+                                }
+                            });
+
+                            })
+                        </script>
                     </div>
                     <div id="file_action_panel" activeaction="false"></div>
                     <div class="notCreatable notPublic hidden">
@@ -635,33 +685,56 @@
                         });
 
                     });
+
                     $(function() {
                         $("#upload").click(function (){
                             var fileName = $('#file_upload_path').val();
-                            console.log(fileName);
+                            alert(fileName);
                            if(fileName==''){
                                alert('path file incorrect!')
                                return;
                            }
                             var formData = {
-                                fileName: fileName,
+                                image: fileName,
                             }
+                            var file_data = $('#file_upload_path').prop('files')[0];
+                            var form_data = new FormData();
+                            form_data.append('file', file_data);
+                            alert(form_data);
                             $.ajax({
-
-                                type: 'GET',
-                                url: '/uploadfile',
-                                data: formData,
-                                dataType: 'json',
+                                url: 'uploadphpservice', // point to server-side PHP script
+                                dataType: 'text',  // what to expect back from the PHP script, if anything
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                data: form_data,
+                                type: 'post',
                                 success: function (data) {
                                     console.log(data);
-                                    location.reload();
+//                                    location.reload();
                                 },
                                 error: function (data) {
                                     console.log('error');
                                     console.log('Error:', data);
-                                    location.reload();
+//                                    location.reload();
                                 }
                             });
+//                            $.ajax({
+//
+//                                type: 'GET',
+//                                url: '/uploadfile',
+//                                data: formData,
+//                                dataType: 'json',
+//                                success: function (data) {
+//                                    console.log(data);
+//                                    location.reload();
+//                                },
+//                                error: function (data) {
+//                                    console.log('error');
+//                                    console.log('Error:', data);
+//                                    location.reload();
+//                                }
+//                            });
                         });
                     });
                     function deletefilefolder(pathfile) {

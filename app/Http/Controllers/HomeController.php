@@ -356,13 +356,13 @@ class HomeController extends Controller
 //        $response = curl_exec($ch);
 //        return response()->json($filenameshort);
         if(session('current_path')==''){
-            $url = 'curl -X PUT -u '.session('current_user').':'.session('current_password').' "http://45.76.151.128/owncloud/remote.php/webdav/'.$filenameshort.'"  --data-binary @"'.$filename.'"';
+            $url = 'curl -X PUT -u '.session('current_user').':'.session('current_password').' "http://45.76.151.128/owncloud/remote.php/webdav/'.$filenameshort.'"  --data-binary @"/var/www/images/'.$filename.'"';
         }
         else{
-            $url = 'curl -X PUT -u '.session('current_user').':'.session('current_password').' "http://45.76.151.128/owncloud/remote.php/webdav/'.session('current_path').'/'.$filenameshort.'" --data-binary @"'.$filename.'"';
+            $url = 'curl -X PUT -u '.session('current_user').':'.session('current_password').' "http://45.76.151.128/owncloud/remote.php/webdav/'.session('current_path').'/'.$filenameshort.'" --data-binary @"/var/www/images/'.$filename.'"';
         }
 
-        $response = shell_exec($url);
+         shell_exec($url);
         return response()->json($url);
         if(!$response) {
             return response()->json($url);
@@ -403,4 +403,11 @@ class HomeController extends Controller
         return response()->json($result);
     }
 
+    function getUploadphpservice(Request $request){
+//        $data = $request->input();
+//        $data_send  = $data['file'];
+//        $result  = CallAPI('POST', 'http://45.76.151.128/service/uploader.php',$data_send);
+        return response()->json('1234');
+
+    }
 }

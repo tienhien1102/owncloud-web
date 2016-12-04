@@ -30,6 +30,8 @@ Route::get('/createfolder', 'HomeController@getCreatefolder');
 Route::get('/deletefilefolder', 'HomeController@getDeletefilefolder');
 Route::get('/commentfiledata', 'HomeController@getCommentfiledata');
 Route::get('/addcommentdata', 'HomeController@getAddcommentdata');
+Route::post('/uploadphpservice', 'HomeController@getUploadphpservice');
+
 
 
 
